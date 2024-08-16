@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Website</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #1e1e1e;
+            color: #ffffff;
+            margin: 0;
+            padding: 0;
+        }
+        nav {
+            padding: 10px;
+            box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.5);
+        }
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+        }
+        nav li {
+            margin: 0 15px;
+        }
+        h3{
+         color: #6200ea;
+        }
+        nav a:hover {
+            text-decoration: underline;
+        }
+        .container {
+            padding: 20px;
+            max-width: 750px;
+            margin: auto;
+            background-color: #333;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
+        }
+        p, ul {
+            line-height: 1.6;
+        }
+        .team-list {
+            list-style-type: none;
+            padding: 0;
+        }
+        .team-list li {
+            margin-bottom: 10px;
+        }
+        .contact {
+            margin-top: 20px;
+            text-align: center;
+        }
+        .contact a {
+            color: #6200ea;
+            text-decoration: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="background"></div>
+    <nav>
+        <ul>
+            <li><a href="/main">Main Page</a></li>
+            <li><a href="/how-to-use">How to Use</a></li>
+            <li><a href="/credits">Credits</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <h2 style="text-align:center">Welcome to "Your Website"</h2>
+
+
+        <h3>About Us</h3>
+        <p>We are a team of three students from RV University who are passionate about making web development fun and engaging. Our mission is to blend hands-on coding with exciting challenges to help both beginners and experienced developers learn and grow.</p>
+
+        <h3>Our Team</h3>
+        <ul class="team-list">
+            <li>Apoorv Gadiya</li>
+            <li>Sri Krishna Hebbar</li>
+            <li>Sushruth V Kamble</li>
+        </ul>
+        <p>As a dedicated team of students, we’ve come together to create a platform that makes coding accessible and enjoyable. Our backgrounds in technology and our love for problem-solving drive us to provide a unique learning experience.</p>
+
+        <h3>Project Description</h3>
+        <p>A true masterpiece of a functionally dysfunctioning website, A Better Way to Define is a Website that builds websites. There will be three code editors: one for HTML, one for CSS, and one for JavaScript. The best part is that you can see your website come to life as soon as you fill them with your wonderful codes.</p>
+        <p>But... Here's a twist. Before you can run the code, you have to solve a word search whose link will be shared with you. This word search contains some HTML keywords hidden within it, which is both fun for new coders to get a grip on HTML keywords and enjoyable for professionals to solve before seeing their beautiful website. Once you solve the word search, send a screenshot to our website. This screenshot will be reviewed by Gemini. Once accepted, you’ll get your turn to run your website and showcase your creation.</p>
+        <p>Whether you’re a seasoned coder or a curious newbie, our platform offers a hands-on approach to learning. Experiment, create, and see your results in real-time—all while solving puzzles and enjoying the thrill of discovery.</p>
+
+        <div class="contact">
+            <p>For any questions or feedback, feel free to <a href="mailto:apoorvg.btech23@rvu.edu.in">contact us</a>.</p>
+        </div>
+    </div>
+
+</body>
+
+</html>

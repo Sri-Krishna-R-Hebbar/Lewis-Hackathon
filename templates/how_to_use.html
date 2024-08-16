@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Instructions</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #1e1e1e;
+            color: #ffffff;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            padding: 20px;
+            max-width: 800px;
+            margin: auto;
+            background-color: #333;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
+        }
+        h2 {
+            color: #6200ea;
+        }
+        ol {
+            line-height: 1.6;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="background"></div>
+    <nav>
+        <ul>
+            <li><a href="/main">Main Page</a></li>
+            <li><a href="/how-to-use">How to Use</a></li>
+            <li><a href="/credits">Credits</a></li>
+            <li><a href="/">Home</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <h2>Instructions </h2>
+        <a href ="https://wordsearchlabs.com/view/620788"> Word Search link </a>
+        <p>Click on the link and complete the word search.</p>
+        <ol>
+            <li>After finishing the word search, submit a screenshot of it on the website.</li>
+            <li>Enter your HTML code in the HTML slot.</li>
+            <li>Enter your CSS code in the CSS slot.</li>
+            <li>Enter your JavaScript code in the JavaScript slot.</li>
+            <li>Click the “Run” button.</li>
+            <li>Please wait for 5-10 seconds for the website compiler to be ready</li>
+            <li>If your word search is correct and all keywords are found, your website will be created instantly.</li>
+        </ol>
+    </div>
+</body>
+
+</html>

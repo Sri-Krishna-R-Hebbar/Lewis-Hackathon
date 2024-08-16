@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>HTML CSS JS CODE RUNNER</title>
+    <style>
+        /* Existing CSS */
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            box-sizing: border-box;
+            background-color: #444;
+            color: #fff;
+        }
+        #editors {
+            display: flex;
+            width: 100%;
+            height: 50%;
+            justify-content: space-around;
+            box-sizing: border-box;
+            padding: 10px;
+        }
+        .editor-container {
+            width: 30%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        .editor-title {
+            background-color: black;
+            padding: 10px;
+            border-bottom: 1px solid #ccc;
+            text-align: center;
+            font-weight: bold;
+        }
+        .editor {
+            flex-grow: 1;
+            margin: 0;
+            padding: 10px;
+            box-sizing: border-box;
+        }
+        button {
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            text-align: center;
+            text-decoration: none;
+            color: #fff;
+            background-color: #007bff;
+            border: none;
+            border-radius: 4px;
+            margin: 5px;
+        }
+        input[type="file"] {
+            margin: 10px;
+            display: inline-block;
+            padding: 5px 10px;
+            font-size: 12px;
+            cursor: pointer;
+            text-align: center;
+            text-decoration: none;
+            color: #fff;
+            background-color: #210b36;
+            border: none;
+            border-radius: 2px;
+
+
+        }
+    </style>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.61.1/codemirror.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/codemirror@5.64.0/theme/dracula.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.61.1/codemirror.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.61.1/mode/xml/xml.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.61.1/mode/css/css.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.61.1/mode/javascript/javascript.min.js"></script>
+</head>
+<body>
+    <div class="background"></div>
+    <h1>HTML CSS JS - CODE RUNNER</h1>
+    <li><a href="/">Home</a></li>
+    <input type="file" id="fileInput" accept=".png" >
+    <button style="background-color: #210b36" onclick="uploadFile()">Upload PNG</button>
+    <div id="editors">
+        <div class="editor-container">
+            <div class="editor-title">HTML</div>
+            <textarea id="htmlEditor" class="editor" placeholder="HTML CODE HERE"></textarea>
+        </div>
+        <div class="editor-container">
+            <div class="editor-title">CSS</div>
+            <textarea id="cssEditor" class="editor" placeholder="CSS CODE HERE"></textarea>
+        </div>
+        <div class="editor-container">
+            <div class="editor-title">JavaScript</div>
+            <textarea id="jsEditor" class="editor" placeholder="JS CODE HERE"></textarea>
+        </div>
+    </div>
+    <button style="background-color: #210b36" onclick="submitAndRunCode()">Submit and Run</button>
+
+
+    <script>
+        var htmlEditor = CodeMirror.fromTextArea(document.getElementById('htmlEditor'), {
+            mode: 'xml',
+            htmlMode: true,
+            lineNumbers: true,
+            theme: 'dracula'
+        });
+        var cssEditor = CodeMirror.fromTextArea(document.getElementById('cssEditor'), {
+            mode: 'css',
+            lineNumbers: true,
+            theme: 'dracula'
+        });
+        var jsEditor = CodeMirror.fromTextArea(document.getElementById('jsEditor'), {
+            mode: 'javascript',
+            lineNumbers: true,
+            theme: 'dracula'
+        });
+
+        function submitAndRunCode() {
+            var htmlCode = htmlEditor.getValue();
+            var cssCode = cssEditor.getValue();
+            var jsCode = jsEditor.getValue();
+
+            // Send code to the backend via AJAX
+            fetch("/process_code", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    html: htmlCode,
+                    css: cssCode,
+                    js: jsCode
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.redirect_url) {
+                    // Redirect to the render page
+                    window.location.href = data.redirect_url;
+                }
+            })
+            .catch(error => {
+                console.error("Error:", error);
+            });
+        }
+
+        function uploadFile() {
+            var fileInput = document.getElementById('fileInput');
+            var file = fileInput.files[0];
+
+            if (file && file.type === 'image/png' && file.size <= 5 * 1024 * 1024) {
+                var formData = new FormData();
+                formData.append('file', file);
+
+                fetch("/upload_image", {
+                    method: "POST",
+                    body: formData
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        alert('File uploaded successfully!');
+                    } else {
+                        alert('File upload failed.');
+                    }
+                })
+                .catch(error => {
+                    console.error("Error:", error);
+                });
+            } else {
+                alert('Please upload a valid PNG file of size up to 4 MB.');
+            }
+        }
+    </script>
+</body>
+</html>
